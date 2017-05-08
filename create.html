@@ -30,11 +30,17 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
-  <script>
-  function sendData(data) {
+  <script type="text/javascript">
+  function sendData() {
+
+    alert("hello");
+
     var request = new XMLHttpRequest();
 
     request.open('POST', 'http://polls.apiblueprint.org/incidents');
+
+    request.setRequestHeader('Content-Type', 'application/json');
+    request.setRequestHeader('Authorization', 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
 
     request.onreadystatechange = function () {
       if (this.readyState === 4) {
@@ -43,15 +49,18 @@
         console.log('Body:', this.responseText);
       }
     };
-    request.send();
+
+    var body = {
+      'incident': 'Testtest',
+      'user_id': '1',
+      'detail': 'Praesent vehicula neque et mi viverra molestie. Duis dui nisl, pellentesque ac laoreet vitae, tempor vel turpis. Nam sit amet est tortor.',
+      'latitude': '14.0806709',
+      'longitude': '100.6122299'
+    };
+
+    request.send(JSON.stringify(body));
   }
 
-  function myFunction() {
-    var inpObj = document.getElementById("id1");
-    if (inpObj.checkValidity() == false) {
-      document.getElementById("demo").innerHTML = inpObj.validationMessage;
-    }
-  }
 
   </script>
 
@@ -70,19 +79,7 @@
         </button>
         <a class="navbar-brand" href="#">Security Guard Portal</a>
       </div>
-      <!--
-      <div id="navbar" class="navbar-collapse collapse">
-      <form class="navbar-form navbar-right">
-      <div class="form-group">
-      <input type="text" placeholder="Email" class="form-control">
-    </div>
-    <div class="form-group">
-    <input type="password" placeholder="Password" class="form-control">
-  </div>
-  <button type="submit" onclick="myFunction()" class="btn btn-success">Sign in</button>
-</form>
-</div>
--->
+
 <!--/.navbar-collapse -->
 
 </div>
@@ -95,25 +92,29 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="form-group">
-      <label for="usr">Incident:</label>
-      <input type="text" class="form-control" id="usr">
+
+<form class="form-signin" action="javascript:sendData()">
+    <div class="container">
+      <div class="row">
+        <div class="form-group">
+          <label for="lb_incident">Incident:</label>
+          <input type="text" class="form-control" id="incident">
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="lb_detail">Detail:</label>
+          <textarea class="form-control" rows="5" id="detail"></textarea>
+        </div>
+        <br>
+        <div class="form-group">
+          <label for="lb_location">Location:</label>
+          <div id="map" style="width:100%;height:400px;"></div>
+        </div>
+         <input class="btn btn-default" name="submit"  type="submit" value="Submit  &raquo;"/>
+
+      </div>
     </div>
-    <br>
-    <div class="form-group">
-      <label for="comment">Detail:</label>
-      <textarea class="form-control" rows="5" id="comment"></textarea>
-    </div>
-    <br>
-    <div class="form-group">
-      <label for="comment">Location:</label>
-      <div id="map" style="width:100%;height:400px;"></div>
-    </div>
-    <p><a class="btn btn-default" href="#" role="button">Submit &raquo;</a></p>
-  </div>
-</div>
+</form>
 </div>
 
 <hr>
