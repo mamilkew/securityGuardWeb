@@ -57,36 +57,63 @@
 <div class="jumbotron">
     <div class="container">
         <h2>Incident Information</h2>
+        <p><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+            Assigned
+        </button></p>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h2 class="modal-title" id="myModalLabel">No. 1</h2>
+            </div>
+
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Information</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="width: 20%"><label>Incident: </label></td>
+                        <td>CSIM is on fire</td>
+                    </tr>
+                    <tr>
+                        <td><label>Created by: </label></td>
+                        <td>Teera</td>
+                    </tr>
+                    <tr>
+                        <td><label>Detail: </label></td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ultricies enim, vitae molestie lectus. Nam sit amet sem ut nulla sodales feugiat.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><label>Location: </label><div id="map" style="height: 300px"></div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <div class="container">
     <div class="row">
         <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <h2>Incident No.000001</h2>
-            <table class="table">
-                <tbody>
-                <tr>
-                    <td style="width: 20%"><label>Incident: </label></td>
-                    <td>CSIM is on fire</td>
-                </tr>
-                <tr>
-                    <td><label>Created by: </label></td>
-                    <td>Teera</td>
-                </tr>
-                <tr>
-                    <td><label>Detail: </label></td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ultricies enim, vitae molestie lectus. Nam sit amet sem ut nulla sodales feugiat.</td>
-                </tr>
-                <tr>
-                    <td><label>Location: </label></td>
-                    <td><div id="map" style="width: 100%"></div></td>
-                </tr>
-                </tbody>
-            </table>
-
-        </div>
+        <div class="col-md-6"></div>
         <div class="col-md-3"></div>
     </div>
     <hr>
@@ -112,11 +139,15 @@
         var marker;
         var incident_location = {lat: 14.080627, lng: 100.6103773};
         var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 16,
+            zoom: 15,
             center: incident_location
         });
 
-        marker = new google.maps.Marker({});
+        marker = new google.maps.Marker({
+            position: incident_location,
+            map: map,
+            title: "AIT"
+        });
 
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
@@ -128,24 +159,14 @@
             content: contentString
         });
 
-// add a marker for creating incident
-        google.maps.event.addListener(map, 'click', function (event) {
-            placeMarker(event.latLng);
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
         });
-
-        function placeMarker(location) {
-            marker.setMap(null);
-            marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                title: location.lat() + ", " + location.lng()
-            });
-
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
-        }
     }
+
+    $('#myModal').on('shown.bs.modal', function(){
+        initMap();
+    });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
         async defer></script>

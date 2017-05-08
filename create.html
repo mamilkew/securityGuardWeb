@@ -1,155 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <!-- <link rel="icon" href="../../favicon.ico"> -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- <link rel="icon" href="../../favicon.ico"> -->
 
-  <title>Create Incident</title>
+    <title>Create Incident</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-  <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="css/jumbotron.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/jumbotron.css" rel="stylesheet">
 
-  <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-  <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-  <script src="assets/js/ie-emulation-modes-warning.js"></script>
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]>
+    <script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
 
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-  <![endif]-->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 
-  <script type="text/javascript">
-  function sendData() {
+    <script type="text/javascript">
+        var latMap = 14.080627;
+        var lngMap = 100.6103773;
+        function sendData() {
 
-    //alert("hello");
+            //alert("hello");
 
-    var request = new XMLHttpRequest();
+            var request = new XMLHttpRequest();
 
-    //request.open('POST', 'http://polls.apiblueprint.org/incidents');
-    //
-    request.open('POST','http://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents');
-    request.setRequestHeader('Content-Type', 'application/json');
-    request.setRequestHeader('Authorization', 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
-    request.setRequestHeader('access-token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
+            //request.open('POST', 'http://polls.apiblueprint.org/incidents');
+            //
+            request.open('POST', 'http://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents');
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.setRequestHeader('Authorization', 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
+            request.setRequestHeader('access-token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
 
-    request.onreadystatechange = function () {
-      if (this.readyState === 4) {
-        console.log('Status:', this.status);
-        console.log('Headers:', this.getAllResponseHeaders());
-        console.log('Body:', this.responseText);
-      }
-    };
+            request.onreadystatechange = function () {
+                if (this.readyState === 4) {
+                    console.log('Status:', this.status);
+                    console.log('Headers:', this.getAllResponseHeaders());
+                    console.log('Body:', this.responseText);
+                }
+            };
 
-    var incident = document.getElementById('incident').value;
-    var user_id = "1";
-    var detail = document.getElementById('detail').value;
-    var latitude = "14.0806709";
-    var longtitude = "100.6122299";
+            var incident = document.getElementById('incident').value;
+            var user_id = "1";
+            var detail = document.getElementById('detail').value;
+            var latitude = latMap;
+            var longtitude = lngMap;
+
+            alert(latitude + ", " + longtitude);
+
+            /*
+             var body = {
+             'incident': 'Testtest',
+             'user_id': '1',
+             'detail': 'Praesent vehicula neque et mi viverra molestie. Duis dui nisl, pellentesque ac laoreet vitae, tempor vel turpis. Nam sit amet est tortor.',
+             'latitude': '14.0806709',
+             'longitude': '100.6122299'
+             };
+             */
+            var body = {
+                'incident': incident,
+                'user_id': user_id,
+                'detail': detail,
+                'latitude': latitude,
+                'longitude': longtitude
+            };
+
+            alert(body);
+
+            /*
+             var message = "'incident': " +
+             var body = {
+
+             };
+             */
+            request.send(JSON.stringify(body));
+        }
 
 
-
-
-/*
-    var body = {
-      'incident': 'Testtest',
-      'user_id': '1',
-      'detail': 'Praesent vehicula neque et mi viverra molestie. Duis dui nisl, pellentesque ac laoreet vitae, tempor vel turpis. Nam sit amet est tortor.',
-      'latitude': '14.0806709',
-      'longitude': '100.6122299'
-    };
-*/
-    var body = {
-      'incident': incident,
-      'user_id': user_id,
-      'detail': detail,
-      'latitude': latitude,
-      'longitude': longtitude
-    };
-
-alert(body);
-
-/*
-    var message = "'incident': " +
-    var body = {
-
-    };
-*/
-    request.send(JSON.stringify(body));
-  }
-
-
-  </script>
+    </script>
 
 </head>
 
 <body>
 
-  <nav class="navbar navbar-inverse navbar-fixed-top">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Security Guard Portal</a>
-      </div>
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Security Guard Portal</a>
+        </div>
 
-<!--/.navbar-collapse -->
+        <!--/.navbar-collapse -->
 
-</div>
+    </div>
 </nav>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
-  <div class="container">
-    <h2>Create Incident</h2>
-  </div>
+    <div class="container">
+        <h2>Create Incident</h2>
+    </div>
 </div>
 
+<div class="container">
+    <form class="form-signin" id="formincident" action="javascript:sendData()">
+        <div class="container">
+            <div class="row">
+                <div class="form-group">
+                    <label for="lb_incident">Incident:</label>
+                    <input type="text" class="form-control" id="incident">
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="lb_detail">Detail:</label>
+                    <textarea class="form-control" rows="5" id="detail"></textarea>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="lb_location">Location:</label>
+                    <div id="map" style="width:100%;height:400px;"></div>
+                </div>
+                <input class="btn btn-default" name="submit" type="submit" value="Submit  &raquo;"/>
 
-<form class="form-signin" id="formincident" action="javascript:sendData()">
-    <div class="container">
-      <div class="row">
-        <div class="form-group">
-          <label for="lb_incident">Incident:</label>
-          <input type="text" class="form-control" id="incident">
+            </div>
         </div>
-        <br>
-        <div class="form-group">
-          <label for="lb_detail">Detail:</label>
-          <textarea class="form-control" rows="5" id="detail"></textarea>
-        </div>
-        <br>
-        <div class="form-group">
-          <label for="lb_location">Location:</label>
-          <div id="map" style="width:100%;height:400px;"></div>
-        </div>
-         <input class="btn btn-default" name="submit"  type="submit" value="Submit  &raquo;"/>
-
-      </div>
-    </div>
-</form>
+    </form>
 
 
-<hr>
+    <hr>
 
-<footer>
-  <p >&copy; 2017 AIT CSIM Security Guard Service, Inc.</p>
-</footer>
+    <footer>
+        <p>&copy; 2017 AIT CSIM Security Guard Service, Inc.</p>
+    </footer>
 </div> <!-- /container -->
 
 
@@ -162,49 +165,50 @@ alert(body);
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <script>
-var map;
-function initMap() {
+    var map;
+    function initMap() {
 // add a marker for showing incident
-  var marker;
-  var incident_location = {lat: 14.080627, lng: 100.6103773};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 16,
-    center: incident_location
-  });
+        var marker;
+        var incident_location = {lat: 14.080627, lng: 100.6103773};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 16,
+            center: incident_location
+        });
 
-    marker = new google.maps.Marker({
-    });
+        marker = new google.maps.Marker({});
 
-  var contentString = '<div id="content">'+
-    '<div id="siteNotice">'+
-    'Incident Here!'+
-    '</div>'+
-    '</div>';
+        var contentString = '<div id="content">' +
+            '<div id="siteNotice">' +
+            'Incident Here!' +
+            '</div>' +
+            '</div>';
 
-    var infowindow = new google.maps.InfoWindow({
-        content: contentString
-    });
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
 
 // add a marker for creating incident
-  google.maps.event.addListener(map, 'click', function(event) {
-    placeMarker(event.latLng);
-  });
+        google.maps.event.addListener(map, 'click', function (event) {
+            placeMarker(event.latLng);
+        });
 
-  function placeMarker(location) {
-    marker.setMap(null);
-    marker = new google.maps.Marker({
-      position: location,
-      map: map,
-      title: location.lat() + ", " + location.lng()
-    });
+        function placeMarker(location) {
+            marker.setMap(null);
+            marker = new google.maps.Marker({
+                position: location,
+                map: map,
+                title: location.lat() + ", " + location.lng()
+            });
+            latMap = location.lat();
+            lngMap = location.lng();
 
-    marker.addListener('click', function() {
-      infowindow.open(map, marker);
-    });
-  }
-}
+            marker.addListener('click', function () {
+                infowindow.open(map, marker);
+            });
+        }
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
-async defer></script>
+        async defer></script>
 </body>
 </html>
