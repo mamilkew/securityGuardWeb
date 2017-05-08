@@ -42,19 +42,29 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=myMap"></script>
 
     <script>
-        var request = new XMLHttpRequest();
+        function sendData(data) {
+            var request = new XMLHttpRequest();
 
-        request.open('POST', 'http://polls.apiblueprint.org/incidents');
+            request.open('POST', 'http://polls.apiblueprint.org/incidents');
 
-        request.onreadystatechange = function () {
-          if (this.readyState === 4) {
-            console.log('Status:', this.status);
-            console.log('Headers:', this.getAllResponseHeaders());
-            console.log('Body:', this.responseText);
+            request.onreadystatechange = function () {
+              if (this.readyState === 4) {
+                console.log('Status:', this.status);
+                console.log('Headers:', this.getAllResponseHeaders());
+                console.log('Body:', this.responseText);
+              }
+            };
+
+            request.send();
           }
-        };
 
-        request.send();
+          function myFunction() {
+    var inpObj = document.getElementById("id1");
+    if (inpObj.checkValidity() == false) {
+        document.getElementById("demo").innerHTML = inpObj.validationMessage;
+    }
+}
+
     </script>
 
 </head>
@@ -72,6 +82,7 @@
             </button>
             <a class="navbar-brand" href="#">Security Guard Portal</a>
         </div>
+        <!--
         <div id="navbar" class="navbar-collapse collapse">
             <form class="navbar-form navbar-right">
                 <div class="form-group">
@@ -80,16 +91,19 @@
                 <div class="form-group">
                     <input type="password" placeholder="Password" class="form-control">
                 </div>
-                <button type="submit" class="btn btn-success">Sign in</button>
+                <button type="submit" onclick="myFunction()" class="btn btn-success">Sign in</button>
             </form>
-        </div><!--/.navbar-collapse -->
+        </div>
+      -->
+        <!--/.navbar-collapse -->
+
     </div>
 </nav>
 
 <!-- Main jumbotron for a primary marketing message or call to action -->
 <div class="jumbotron">
     <div class="container">
-        <h1>Create Incident</h1>
+        <h2>Create Incident</h2>
     </div>
 </div>
 
