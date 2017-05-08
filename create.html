@@ -144,11 +144,18 @@ function initMap() {
     center: incident_location
   });
 
+    marker = new google.maps.Marker({
+    });
+
   var contentString = '<div id="content">'+
     '<div id="siteNotice">'+
-    'AIT Here!'+
+    'Incident Here!'+
     '</div>'+
     '</div>';
+
+    var infowindow = new google.maps.InfoWindow({
+        content: contentString
+    });
 
 // add a marker for creating incident
   google.maps.event.addListener(map, 'click', function(event) {
