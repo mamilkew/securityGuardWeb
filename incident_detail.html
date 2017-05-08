@@ -64,7 +64,7 @@
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-            <h2>Incident No.000001</h2>
+            <h2>No. 1</h2>
             <table class="table">
                 <tbody>
                 <tr>
@@ -80,12 +80,10 @@
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ultricies enim, vitae molestie lectus. Nam sit amet sem ut nulla sodales feugiat.</td>
                 </tr>
                 <tr>
-                    <td><label>Location: </label></td>
-                    <td><div id="map" style="width: 100%"></div></td>
+                    <td colspan="2"><label>Location: </label><div id="map" style="height: 400px"></div></td>
                 </tr>
                 </tbody>
             </table>
-
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -116,7 +114,11 @@
             center: incident_location
         });
 
-        marker = new google.maps.Marker({});
+        marker = new google.maps.Marker({
+            position: incident_location,
+            map: map,
+            title: "AIT"
+        });
 
         var contentString = '<div id="content">' +
             '<div id="siteNotice">' +
@@ -128,23 +130,9 @@
             content: contentString
         });
 
-// add a marker for creating incident
-        google.maps.event.addListener(map, 'click', function (event) {
-            placeMarker(event.latLng);
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
         });
-
-        function placeMarker(location) {
-            marker.setMap(null);
-            marker = new google.maps.Marker({
-                position: location,
-                map: map,
-                title: location.lat() + ", " + location.lng()
-            });
-
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
-        }
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
