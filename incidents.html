@@ -32,6 +32,16 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<script languge=javascript>  
+ 
+var url=window.location.search;    
+  if (url.indexOf("?") != -1) {
+      var str = url.substr(1);
+      strs = str.split("=");
+     var statues=strs[1];
+      }
+</script>
+
 </head>
 
 <body>
@@ -52,9 +62,10 @@
                     <a href="incidents.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">List all incidents<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Open</a></li>
-                        <li><a href="#">Assigned</a></li>
-                        <li><a href="#">Closed</a></li>
+                      <li><a href="incidents.html">List All</a></li>
+                        <li><a href="incidents.html?statues=open">Open</a></li>
+                        <li><a href="incidents.html?statues=assigned">Assigned</a></li>
+                        <li><a href="incidents.html?statues=closed">Closed</a></li>
                     </ul>
                 </li>
                 <li><a href="create.html">New Incident</a></li>
@@ -186,11 +197,8 @@
 <!--add a marker for showing incident-->
 <script type="text/javascript">
     var map;
-    var latitude = 14.080627; //default
-    var longitude = 100.6103773; //default
-
     function initMap() {
-        var incident_location = {lat: latitude, lng: longitude};
+        var incident_location = {lat: 14.080627, lng: 100.6103773};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: incident_location
@@ -199,7 +207,7 @@
         var marker = new google.maps.Marker({
             position: incident_location,
             map: map,
-            title: latitude + ', ' + longitude
+            title: "AIT"
         });
 
         var contentString = '<div id="content">' +
@@ -220,10 +228,6 @@
     $('#myModal').on('shown.bs.modal', function () {
         initMap();
     });
-    function latlng(lat, lng) {
-        latitude = lat;
-        longitude = lng;
-    }
 
     $(document).ready(function () {
         var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -232,15 +236,17 @@
             "ajax": {
                 "url": "https://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents",
                 'beforeSend': function (request) {
-                    request.setRequestHeader("Authorization", 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
+                request.setRequestHeader("Authorization", 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
                 },
                 "dataSrc" : function (json) {
                     var return_data = new Array();
                     for(var i=0;i< json.length; i++){
-                        var date = new Date(json[i].created_at);
-                        if (json[i].status == 'open'){
-                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="latlng('+ parseFloat(json[i].latitude) + ', ' + parseFloat(json[i].longitude) + ')">Assigned</button>'
-                        }
+                        if (statues != 'open' && statues != 'closed' && statues != 'assigned')
+                        {
+                          var date = new Date(json[i].created_at);
+                          if (json[i].status == 'open'){
+                           var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Assigned</button>'
+                         }
                         else {
                             var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assigned</button>'
                         }
@@ -252,6 +258,49 @@
                             'created_by': json[i].created_by.username,
                             'button'  : html_btn
                         })
+                    } else if (statues == 'open')
+                      {
+                          var date = new Date(json[i].created_at);
+                          if (json[i].status == 'open'){
+                           var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Assigned</button>'                      
+                          return_data.push({
+                            'id': json[i].id,
+                            'title': json[i].title,
+                            'status': json[i].status,
+                            'created_at': date.getDate() + ' ' + monthShortNames[date.getMonth()+1] + ' ' + date.getFullYear(),
+                            'created_by': json[i].created_by.username,
+                            'button'  : html_btn
+                        })   
+                         }    
+                      }else if (statues == 'closed')
+                      {
+                          var date = new Date(json[i].created_at);
+                          if (json[i].status == 'closed'){
+                           var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assigned</button>'                    
+                          return_data.push({
+                            'id': json[i].id,
+                            'title': json[i].title,
+                            'status': json[i].status,
+                            'created_at': date.getDate() + ' ' + monthShortNames[date.getMonth()+1] + ' ' + date.getFullYear(),
+                            'created_by': json[i].created_by.username,
+                            'button'  : html_btn
+                        })   
+                         }    
+                      }else if (statues == 'assigned')
+                      {
+                          var date = new Date(json[i].created_at);
+                          if (json[i].status == 'assigned'){
+                           var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assigned</button>'                      
+                          return_data.push({
+                            'id': json[i].id,
+                            'title': json[i].title,
+                            'status': json[i].status,
+                            'created_at': date.getDate() + ' ' + monthShortNames[date.getMonth()+1] + ' ' + date.getFullYear(),
+                            'created_by': json[i].created_by.username,
+                            'button'  : html_btn
+                        })   
+                         }    
+                      }
                     }
                     return return_data;
                 }
@@ -271,6 +320,7 @@
             }]
         });
     });
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
         async defer></script>
