@@ -52,9 +52,9 @@
                     <a href="incidents.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">List all incidents<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Open</a></li>
-                        <li><a href="#">Assigned</a></li>
-                        <li><a href="#">Closed</a></li>
+                        <li><a href="#" onclick="OpenList()">Open</a></li>
+                        <li><a href="#" onclick="AssignedList()">Assigned</a></li>
+                        <li><a href="#" onclick="ClosedList()">Closed</a></li>
                     </ul>
                 </li>
                 <li><a href="create.html">New Incident</a></li>
@@ -224,10 +224,10 @@
         latitude = lat;
         longitude = lng;
     }
-
+    var table;
     $(document).ready(function () {
         var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-        $('#myTable').DataTable({
+        table = $('#myTable').DataTable({
             "processing": true,
             "ajax": {
                 "url": "https://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents",
@@ -270,7 +270,18 @@
                 "data": "button"
             }]
         });
+
     });
+    function OpenList(){
+        table.columns(2).search( 'open' ).draw();
+    }
+    function AssignedList(){
+        table.columns(2).search( 'assigned' ).draw();
+    }
+    function ClosedList(){
+        table.columns(2).search( 'closed' ).draw();
+    }
+
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
         async defer></script>
