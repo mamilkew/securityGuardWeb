@@ -186,8 +186,8 @@
 <!--add a marker for showing incident-->
 <script type="text/javascript">
     var map;
-    var latitude = 14.080627;
-    var longitude = 100.6103773;
+    var latitude = 14.080627; //default
+    var longitude = 100.6103773; //default
 
     function initMap() {
         var incident_location = {lat: latitude, lng: longitude};
@@ -220,7 +220,10 @@
     $('#myModal').on('shown.bs.modal', function () {
         initMap();
     });
-
+    function latlng(lat, lng) {
+        latitude = lat;
+        longitude = lng;
+    }
 
     $(document).ready(function () {
         var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -268,11 +271,6 @@
             }]
         });
     });
-
-    function latlng(lat, lng) {
-        latitude = lat;
-        longitude = lng;
-    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
         async defer></script>
