@@ -13,6 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet">
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
@@ -135,6 +136,18 @@
                         </td>
                     </tr>
                     <tr>
+                        <td><label>Assign to:</label></td>
+                        <td>
+                            <select class="form-control">
+                                <option value="1">Matt</option>
+                                <option value="2">Vat</option>
+                                <option value="3">Kay</option>
+                                <option value="4">Dung</option>
+                                <option value="5">Guha</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td colspan="2"><label>Location: </label>
                             <div id="map" style="height: 300px"></div>
                         </td>
@@ -142,13 +155,7 @@
                     <tr>
                         <td><label>Assign to:</label></td>
                         <td>
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            <img width="100%" src="http://ichef.bbci.co.uk/naturelibrary/images/ic/credit/640x395/s/sn/snake/snake_1.jpg">
                         </td>
                     </tr>
                     </tbody>
@@ -167,9 +174,10 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
 <script type="text/javascript" charset="utf8"
         src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
 
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="js/bootstrap.min.js"></script>
@@ -221,6 +229,9 @@
             "processing": true,
             "ajax": {
                 "url": "https://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents",
+                'beforeSend': function (request) {
+                    request.setRequestHeader("Authorization", 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
+                },
                 "dataSrc" : function (json) {
                     var return_data = new Array();
                     for(var i=0;i< json.length; i++){
