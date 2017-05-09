@@ -215,28 +215,49 @@
     // });
 
 
-
-    $(document).ready(function() {
+    $(document).ready(function () {
+        var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
         $('#myTable').DataTable({
-            "processing" : true,
-            "ajax" : {
-                "url" : "https://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents",
-                dataSrc : ''
+            "processing": true,
+            "ajax": {
+                "url": "https://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents",
+                "dataSrc" : function (json) {
+                    var return_data = new Array();
+                    for(var i=0;i< json.length; i++){
+                        var date = new Date(json[i].created_at);
+                        if (json[i].status == 'open'){
+                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Assigned</button>'
+                        }
+                        else {
+                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assigned</button>'
+                        }
+                        return_data.push({
+                            'id': json[i].id,
+                            'title': json[i].title,
+                            'status': json[i].status,
+                            'created_at': date.getDate() + ' ' + monthShortNames[date.getMonth()+1] + ' ' + date.getFullYear(),
+                            'created_by': json[i].created_by.username,
+                            'button'  : html_btn
+                        })
+                    }
+                    return return_data;
+                }
             },
-            "columns" : [ {
-                "data" : "id"
+            "columns": [{
+                "data": "id"
             }, {
-                "data" : "incident"
+                "data": "title"
             }, {
-                "data" : "status"
+                "data": "status"
             }, {
-                "data" : "created_at"
-              }, {
-                  "data" : "user_id"
+                "data": "created_at"
+            }, {
+                "data": "created_by"
+            }, {
+                "data": "button"
             }]
         });
     });
-
 
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
