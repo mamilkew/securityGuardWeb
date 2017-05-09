@@ -31,6 +31,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <!--<script src="assets/js/sessionCheck.js"></script>-->
 
 </head>
 
@@ -52,8 +53,9 @@
                     <a href="incidents.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">List all incidents<span class="caret"></span></a>
                     <ul class="dropdown-menu">
+                        <li><a href="#" onclick="AllList()">List All</a></li>
                         <li><a href="#" onclick="OpenList()">Open</a></li>
-                        <li><a href="#" onclick="AssignedList()">Assigned</a></li>
+                        <li><a href="#" onclick="AssignedList()">In Progress</a></li>
                         <li><a href="#" onclick="ClosedList()">Closed</a></li>
                     </ul>
                 </li>
@@ -239,10 +241,10 @@
                     for(var i=0;i< json.length; i++){
                         var date = new Date(json[i].created_at);
                         if (json[i].status == 'open'){
-                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="latlng('+ parseFloat(json[i].latitude) + ', ' + parseFloat(json[i].longitude) + ')">Assigned</button>'
+                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="latlng('+ parseFloat(json[i].latitude) + ', ' + parseFloat(json[i].longitude) + ')">Assign</button>'
                         }
                         else {
-                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assigned</button>'
+                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assign</button>'
                         }
                         return_data.push({
                             'id': json[i].id,
@@ -276,10 +278,13 @@
         table.columns(2).search( 'open' ).draw();
     }
     function AssignedList(){
-        table.columns(2).search( 'assigned' ).draw();
+        table.columns(2).search( 'in progress' ).draw();
     }
     function ClosedList(){
         table.columns(2).search( 'closed' ).draw();
+    }
+    function AllList(){
+        table.columns(2).search( '' ).draw();
     }
 
 </script>
