@@ -45,7 +45,6 @@
             request.open('POST', 'http://private-anon-6f95296b85-aitsg.apiary-mock.com/incidents');
             request.setRequestHeader('Content-Type', 'application/json');
             request.setRequestHeader('Authorization', 'JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
-            request.setRequestHeader('access-token', 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs');
 
             request.onreadystatechange = function () {
                 if (this.readyState === 4) {
@@ -55,29 +54,24 @@
                 }
             };
 
-            var incident = document.getElementById('incident').value;
-            var user_id = "1";
+            var title = document.getElementById('title').value;
+            var created_by = "1";
+            var updated_by = created_by;
+            var created_at = new Date();
             var detail = document.getElementById('detail').value;
             var latitude = latMap;
             var longtitude = lngMap;
 
-            alert(latitude + ", " + longtitude);
+            alert(title + ", " + created_at);
 
-            /*
-             var body = {
-             'incident': 'Testtest',
-             'user_id': '1',
-             'detail': 'Praesent vehicula neque et mi viverra molestie. Duis dui nisl, pellentesque ac laoreet vitae, tempor vel turpis. Nam sit amet est tortor.',
-             'latitude': '14.0806709',
-             'longitude': '100.6122299'
-             };
-             */
             var body = {
-                'incident': incident,
-                'user_id': user_id,
+                'title': title,
                 'detail': detail,
+                'created_by': created_by,
+                'updated_by': updated_by,
                 'latitude': latitude,
-                'longitude': longtitude
+                'longitude': longtitude,
+                'created_at': created_at
             };
 
             alert(body);
@@ -128,8 +122,8 @@
         <div class="container">
             <div class="row">
                 <div class="form-group">
-                    <label for="lb_incident">Incident:</label>
-                    <input type="text" class="form-control" id="incident">
+                    <label for="lb_incident">Title:</label>
+                    <input type="text" class="form-control" id="title">
                 </div>
                 <br>
                 <div class="form-group">
