@@ -186,8 +186,11 @@
 <!--add a marker for showing incident-->
 <script type="text/javascript">
     var map;
+    var latitude = 14.080627;
+    var longitude = 100.6103773;
+
     function initMap() {
-        var incident_location = {lat: 14.080627, lng: 100.6103773};
+        var incident_location = {lat: latitude, lng: longitude};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: incident_location
@@ -196,7 +199,7 @@
         var marker = new google.maps.Marker({
             position: incident_location,
             map: map,
-            title: "AIT"
+            title: latitude + ', ' + longitude
         });
 
         var contentString = '<div id="content">' +
@@ -218,10 +221,6 @@
         initMap();
     });
 
-    // $(document).ready(function () {
-    //     $('#myTable').DataTable();
-    // });
-
 
     $(document).ready(function () {
         var monthShortNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -237,7 +236,7 @@
                     for(var i=0;i< json.length; i++){
                         var date = new Date(json[i].created_at);
                         if (json[i].status == 'open'){
-                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">Assigned</button>'
+                            var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="latlng('+ parseFloat(json[i].latitude) + ', ' + parseFloat(json[i].longitude) + ')">Assigned</button>'
                         }
                         else {
                             var html_btn = '<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" disabled>Assigned</button>'
@@ -270,6 +269,10 @@
         });
     });
 
+    function latlng(lat, lng) {
+        latitude = lat;
+        longitude = lng;
+    }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
         async defer></script>
