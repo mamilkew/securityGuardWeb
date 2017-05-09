@@ -30,7 +30,8 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
+
+    <script type="text/javascript">
         function myFunction() {
             // Declare variables
             var input, filter, table, tr, td, i;
@@ -51,41 +52,43 @@
                 }
             }
         }
+
+
     </script>
-<style>
-    #myInput {
-    background-image: url('/css/searchicon.png'); /* Add a search icon to input */
-    background-position: 10px 12px; /* Position the search icon */
-    background-repeat: no-repeat; /* Do not repeat the icon image */
-    width: 100%; /* Full-width */
-    font-size: 16px; /* Increase font-size */
-    padding: 12px 20px 12px 40px; /* Add some padding */
-    border: 1px solid #ddd; /* Add a grey border */
-    margin-bottom: 12px; /* Add some space below the input */
-    }
+    <style>
+        #myInput {
+            background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+            background-position: 10px 12px; /* Position the search icon */
+            background-repeat: no-repeat; /* Do not repeat the icon image */
+            width: 100%; /* Full-width */
+            font-size: 16px; /* Increase font-size */
+            padding: 12px 20px 12px 40px; /* Add some padding */
+            border: 1px solid #ddd; /* Add a grey border */
+            margin-bottom: 12px; /* Add some space below the input */
+        }
 
-    #myTable {
-    border-collapse: collapse; /* Collapse borders */
-    width: 100%; /* Full-width */
-    border: 1px solid #ddd; /* Add a grey border */
-    font-size: 18px; /* Increase font-size */
-    }
+        #myTable {
+            border-collapse: collapse; /* Collapse borders */
+            width: 100%; /* Full-width */
+            border: 1px solid #ddd; /* Add a grey border */
+            font-size: 18px; /* Increase font-size */
+        }
 
-    #myTable th, #myTable td {
-    text-align: left; /* Left-align text */
-    padding: 12px; /* Add padding */
-    }
+        #myTable th, #myTable td {
+            text-align: left; /* Left-align text */
+            padding: 12px; /* Add padding */
+        }
 
-    #myTable tr {
-    /* Add a bottom border to all table rows */
-    border-bottom: 1px solid #ddd;
-    }
+        #myTable tr {
+            /* Add a bottom border to all table rows */
+            border-bottom: 1px solid #ddd;
+        }
 
-    #myTable tr.header, #myTable tr:hover {
-    /* Add a grey background color to the table header and on hover */
-    background-color: #f1f1f1;
-    }
-</style>
+        #myTable tr.header, #myTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+        }
+    </style>
 
 </head>
 
@@ -102,17 +105,18 @@
                 <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="incidents.html">AIT Security Guard Manager</a>
-                <ul class="nav navbar-nav">
-                    <li class="dropdown">
-                        <a href="incidents.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">List all incidents<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Open</a></li>
-                            <li><a href="#">Assigned</a></li>
-                            <li><a href="#">Closed</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="create.html">New Incident</a></li>
-                </ul>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="incidents.html" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                       aria-haspopup="true" aria-expanded="false">List all incidents<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Open</a></li>
+                        <li><a href="#">Assigned</a></li>
+                        <li><a href="#">Closed</a></li>
+                    </ul>
+                </li>
+                <li><a href="create.html">New Incident</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>Welcome, DUMMY USER!</li>
             </ul>
@@ -134,7 +138,8 @@
 <div class="container">
     <div class="row">
 
-        <table id="myTable">
+        <table id="myTable" class="">
+            <thead>
             <tr class="header">
                 <th style="width:5%;">No.</th>
                 <th style="width:40%;">Incident</th>
@@ -143,15 +148,19 @@
                 <th style="width:10%;">User name</th>
                 <th style="width:10%;">Action</th>
             </tr>
+            </thead>
+            <tbody>
             <tr>
                 <td>1</td>
                 <td>Alfreds Futterkiste</td>
                 <td>Open</td>
                 <td>Germany</td>
                 <td>ammii</td>
-                <td><button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
-                    Assigned
-                </button></td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+                        Assigned
+                    </button>
+                </td>
             </tr>
             <tr>
                 <td>2</td>
@@ -159,9 +168,11 @@
                 <td>Assigned</td>
                 <td>Germany</td>
                 <td>ammii</td>
-                <td><button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#2" disabled>
-                    Assigned
-                </button></td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#2" disabled>
+                        Assigned
+                    </button>
+                </td>
             </tr>
             <tr>
                 <td>3</td>
@@ -169,9 +180,11 @@
                 <td>Closed</td>
                 <td>Germany</td>
                 <td>ammii</td>
-                <td><button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#3" disabled>
-                    Assigned
-                </button></td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#3" disabled>
+                        Assigned
+                    </button>
+                </td>
             </tr>
             <tr>
                 <td>4</td>
@@ -179,10 +192,97 @@
                 <td>Assigned</td>
                 <td>Germany</td>
                 <td>ammii</td>
-                <td><button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
-                    Assigned
-                </button></td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
             </tr>
+            <tr>
+                <td>5</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>11</td>
+                <td>Koniglich Essen</td>
+                <td>Assigned</td>
+                <td>Germany</td>
+                <td>ammii</td>
+                <td>
+                    <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#4" disabled>
+                        Assigned
+                    </button>
+                </td>
+            </tr>
+            </tbody>
         </table>
 
     </div>
@@ -199,7 +299,8 @@
         <div class="modal-content">
 
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
                 <h2 class="modal-title" id="myModalLabel">No. 1</h2>
             </div>
 
@@ -221,10 +322,14 @@
                     </tr>
                     <tr>
                         <td><label>Detail: </label></td>
-                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ultricies enim, vitae molestie lectus. Nam sit amet sem ut nulla sodales feugiat.</td>
+                        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sed ultricies enim, vitae
+                            molestie lectus. Nam sit amet sem ut nulla sodales feugiat.
+                        </td>
                     </tr>
                     <tr>
-                        <td colspan="2"><label>Location: </label><div id="map" style="height: 300px"></div></td>
+                        <td colspan="2"><label>Location: </label>
+                            <div id="map" style="height: 300px"></div>
+                        </td>
                     </tr>
                     <tr>
                         <td><label>Assign to:</label></td>
@@ -253,13 +358,17 @@
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8"
+        src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
 <script src="js/bootstrap.min.js"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
 <!--add a marker for showing incident-->
-<script>
+<script type="text/javascript">
     var map;
     function initMap() {
         var incident_location = {lat: 14.080627, lng: 100.6103773};
@@ -284,13 +393,17 @@
             content: contentString
         });
 
-        marker.addListener('click', function() {
+        marker.addListener('click', function () {
             infowindow.open(map, marker);
         });
     }
 
-    $('#myModal').on('shown.bs.modal', function(){
+    $('#myModal').on('shown.bs.modal', function () {
         initMap();
+    });
+
+    $(document).ready(function () {
+        $('#myTable').DataTable();
     });
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAljsccI7mfDUTFezIHwb1wXDfUZb-JRH4&callback=initMap"
